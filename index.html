@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>COVID-19: The Impact on Unemployment</title>
+  <link rel="icon" href="images/covid.png">
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet">
+  <link href="css/hover.css" rel="stylesheet">
+  <link href="css/scrolling-nav.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+  <script>AOS.init();</script>
+  <!---BubbleChart scripts-->
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script src="https://code.highcharts.com/themes/grid-light.js"></script>
+
+  <!--Google Charts Scripts-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+
+    google.charts.load("current", { packages: ["corechart", "geochart"] })
+
+      .then(function () {
+
+        var data1 = google.visualization.arrayToDataTable([
+          ['Day', 'Total Cases in U.S'],
+          ['Feb 15', 15],
+          ['Feb 22', 35],
+          ['Feb 29', 68],
+          ['Mar 2', 100],
+          ['Mar 4', 158],
+          ['Mar 6', 319],
+          ['Mar 9', 704],
+          ['Mar 11', 1301],
+          ['Mar 13', 2183],
+          ['Mar 15', 3617],
+          ['Mar 18', 9317],
+          ['Mar 20', 19551],
+          ['Mar 22', 33840],
+          ['Mar 25', 68905],
+          ['Mar 28', 124788],
+          ['Mar 31', 193353],
+          ['Apr 3', 283477],
+          ['Apr 6', 375348],
+          ['Apr 9', 475515],
+          ['Apr 16', 682454],
+          ['Apr 23', 886274],
+          ['Apr 28', 1035765],
+          ['May 5', 1237633],
+        ]);
+
+        var options1 = {
+          title: 'Total Coronavirus Cases in the United States (as of may 5th, 2020)',
+          height: 600,
+          legend: { position: 'none' },
+          backgroundColor: '#f8f9fa',
+        };
+
+        var data2 = google.visualization.arrayToDataTable([
+          ['Day', 'Initial Claims'],
+          ['Feb 15', 209336],
+          ['Feb 22', 199278],
+          ['Feb 29', 216982],
+          ['Mar 7', 200382],
+          ['Mar 14', 251416],
+          ['Mar 21', 2920162],
+          ['Mar 28', 6015821],
+          ['Apr 4', 6211406],
+          ['Apr 11', 4965046],
+          ['Apr 18', 4281648],
+          ['Apr 25', 3489261],
+        ]);
+
+        var options2 = {
+          title: 'U.S. Employment and Training Administration, Initial Claims',
+          height: 600,
+          legend: { position: 'none' },
+          backgroundColor: '#f8f9fa',
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('line_chart'));
+
+        //find the appropriate visualization code to draw a line chart and place it in the div below called line_chart
+
+        var menu = document.getElementById('thedropdown');
+        menu.addEventListener('change', drawChart, false);
+
+        drawChart();
+        function drawChart() {
+          switch (menu.selectedIndex) {
+            case 1:
+              chart.draw(data2, options2);
+              break;
+
+            default:
+              chart.draw(data1, options1);
+              break;
+          }
+        }
+      });
+    google.charts.setOnLoadCallback(drawRegionsMap);
+    function drawRegionsMap() {
+
+      var data3 = google.visualization.arrayToDataTable([
+        ['State', 'Total unemployment claims since March 14'],
+        ["Alaska", 71606],
+        ["Alabama", 406732],
+        ["Arkansas", 176895],
+        ["Arizona", 473802],
+        ["California", 3675346],
+        ["Colorado", 338516],
+        ["Connecticut", 261686],
+        ["Delaware", 79222],
+        ["Florida", 1592236],
+        ["Georgia", 1367494],
+        ["Hawaii", 194437],
+        ["Iowa", 260729],
+        ["Idaho", 194437],
+        ["Illinois", 818917],
+        ["Indiana", 569847],
+        ["Kansas", 215722],
+        ["Kentucky", 590829],
+        ["Louisiana", 508202],
+        ["Massachusetts", 725018],
+        ["Maryland", 385657],
+        ["Maine", 108874],
+        ["Michigan", 1261121],
+        ["Minnesota", 556651],
+        ["Missouri", 452126],
+        ["Mississippi", 201890],
+        ["Montana", 89426],
+        ["North Carolina", 747303],
+        ["North Dakota", 57168],
+        ["Nebraska", 104177],
+        ["New Hampshire", 159993],
+        ["New Jersey", 889480],
+        ["New Mexico", 118462],
+        ["Nevada", 386705],
+        ["New York", 1609842],
+        ["Ohio", 1056695],
+        ["Oklahoma", 273958],
+        ["Oregon", 278852],
+        ["Pennsylvania", 1620512],
+        ["Rhode Island", 145615],
+        ["South Carolina", 413542],
+        ["South Dakota", 33743],
+        ["Tennessee", 425668],
+        ["Texas", 1555995],
+        ["Utah", 136778],
+        ["Virginia", 567534],
+        ["Vermont", 56122],
+        ["Washington", 857697],
+        ["Wisconsin", 442581],
+        ["West Virginia", 123828],
+        ["Wyoming", 29653]
+      ]);
+
+      var options3 = {
+        title: 'Total unemployment claims since March 14',
+        height: 600,
+        region: 'US',
+        displayMode: 'regions',
+        resolution: 'provinces',
+        colorAxis: { colors: ['beige', '#d1473d'] },
+        legend: { position: 'right' },
+        backgroundColor: '#f8f9fa',
+      };
+      var chart2 = new google.visualization.GeoChart(document.getElementById('line_chart2'));
+      chart2.draw(data3, options3);
+     
+    }
+    $(window).resize(function(){
+  drawChart();
+  drawRegionsMap();
+});
+  </script>
+
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bg-white" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger hvr-grow" href="http://www.jakeruff.com/">&lt;jakeruff.com/&gt;</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#about">[About]</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#charts">[Charts]</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#sources">[Sources]</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="text-black">
+    <div class="container text-center">
+      <h1 class="covid animated fadeIn delay-2s">COVID-19:</h1>
+      <h1 class="animated fadeIn delay-3s">The Impact on Unemployment</h1>
+      <p class="lead animated fadeIn delay-4s">How the coronavirus decimated America's job market</p>
+      <img src="images/covid.png" height="250px" width="250px" class="hvr-hang">
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto animated bounceInUp delay-5s">
+          <h2>From 100 to Zero</h2>
+          <p class="lead">The coronavrius outbreak made America's job market go from 100 to zero in the blink of an eye.
+            Stay at home orders issued by states and local governments all over the country have frozen the economy,
+            resulting in a record number
+            of Americans filing for unemployment. As the death toll rises, some Americans have to make a very important
+            decision. Risk getting the virus, or risk losing their home?
+          </p> <br>
+          <ul class="list-group">
+            <li class="list-group-item">The total number of people claiming benefits in all programs for the week ending
+              April 11 was 16,339,149, an increase of 3,830,654 from the previous week. There
+              were 1,731,181 persons claiming benefits in all programs in the comparable week in 2019.</li>
+            <li class="list-group-item">Payrolls dropped by 701,000 in March, the first decline in payrolls since
+              September 2010 and came close to the May 2009 financial crisis peak of 800,000.</li>
+            <li class="list-group-item">The leisure and hospitality industry is by far taking the hardest hit with a
+              one-month net change in March of 459,000 jobs lost.</li>
+            <li class="list-group-item">30 million Americans have filed initial unemployment claims since mid-March.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="charts" class="bg-light">
+    <div class="container">
+      <div class="row" justify-content-center>
+        <div class="col-lg-12 mx-auto">
+          <h2 align="center">Total U.S. Cases & Unemployment Claims</h2>
+
+          <div id="line_chart" data-aos="flip-up" data-aos-duration="1000" class="chart"></div>
+          <div class="row" justify-content-center>
+          <select class="select-css" id="thedropdown">
+            <option selected>Total U.S. Cases</option>
+            <option>Unemployment Claims</option>
+          </select>
+        </div>
+          <br></br><br></br>
+          <div class="row" justify-content-center id="limbosection">
+            <div class="col-lg-8 mx-auto" data-aos="fade-right">
+              <h3 id="limbo">America in limbo</h3>
+              <p>In such unprecedented times, many Americans are wondering what will happen to life as they know it.
+                Much like the notion of a "post 9/11" world,
+                Americans are preparing for a "post coronavirus world." As we navigate these uncharted waters one thing
+                is for certain, the effects of COVID-19 are being
+                felt through many industries. Even if you're not in the service industry, companies in all different
+                sectors are laying off, furloughing, and reducing
+                hours for employees. Many Americans are left wondering if they will have a job to go back to. For many,
+                as their jobs are taken, so are important benefits like health insurance.
+                As the health and economic fates of Americans is on the line, some states have decided to lift
+                restrictions, taking the risk to pull up the economy by its bootstraps. Meanwhile,
+                many of the nations top scientific leaders warn of a second wave of the coronavirus.
+              </p> <br>
+            </div>
+            <div class="col-lg-4 mx-auto " data-aos="fade-left">
+              <img src="images/closed.jpg" height="300px" width="350px" id="closedimg" class="responsive">
+            </div>
+          </div><br><br>
+
+          
+          <div class="row">
+            <figure class="highcharts-figure">
+              <div id="Bubblecontainer" data-aos="flip-up" data-aos-duration="1000"></div>
+              <p class="highcharts-description text-muted">
+                <sup>*</sup>Category sizes are based on whether the area ranked among the top, middle or bottom third of subsectors in total employment in February 2020.
+              </p>
+            </figure>
+          </div>
+          <div class="row" justify-content-center>
+            <div class="col-lg-4 mx-auto" data-aos="fade-right">
+              <figure>
+                <img src="images/context.gif" height="300px" width="350px" class="histgraph responsive">
+                <figcaption>Graph showing jobless claims from 1970 to March 2020.</figcaption>
+              </figure>
+
+            </div>
+            <div class="col-lg-8 mx-auto" data-aos="fade-left" id="historic">
+              <h3 id="historic">Job loss like never before</h3>
+              <p>With a never-before-seen sudden rise of unemployment claims, states are scrambling to set up resources
+                for the sheer amount of calls and website visits to various unemployment offices.
+                For example, the Texas Workforce Comission (TWC) took 14 million calls from April 6th-10th, with a
+                shattering 3.4 million calls in a single day. For context, Cisco Gamez, a spokesman for the Texas
+                Workforce Commission said
+                that the average call load is typically 13,000 calls per day. Trying to combat the unforseen rise in
+                claims, TWC has hired an additional 1000 employees and set up 15 additional computer servers for online
+                applications.
+                Due to unemployment centers being swamped and slow rollouts of pandemic assistance, many economists are
+                saying that unemployment is being drastically underreported.
+              </p>
+            </div><br><br>
+          </div>
+          <br></br><br></br>
+          <h2 align="center">Total Unemployment Claims Since March 14, by State</h2>
+          <p class="sources text-muted" align="center"><sup>*</sup>Based on weekly unemployment claims data as of April 30, 2020.</p>
+          <br>
+
+          <div id="line_chart2" align="center" data-aos="flip-down" data-aos-duration="1000" class=></div> <br><br><br><br>
+          <section id="stories">
+            <h2 align="center">The Lives Behind the Data</h2><br><br>
+            <div class="row" data-aos="fade-up" align="center">
+              <div class="col-lg-4 mx-auto">
+                <div class="card text-center" style="width: 18rem;">
+                  <img src="images/nick.jpg" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">Nick<br>Oil & Gas Engineer</h5>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter2">
+                      View his story
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog"
+                      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle"><img src="images/nick.jpg" width=75px height=60px id="lindaIcon"> Nick, Oil & Gas Engineer</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            "The coronavirus has had a extraordinary impact on the oil and gas market. 
+                            Since everyone is staying home the demand for O&G has dropped dramatically and 
+                            companies are forced to conserve cash by implementing budget cuts, furloughs, and layoffs. 
+                            I currently work for a Fortune 500 oilfield services company in Houston as a engineer, and when 
+                            the coronavirus started my company quickly implemented a two week furlough and project cancellations. 
+                            Shortly after they laid off thousands of workers globally and almost a quarter of the 100+ engineers in 
+                            my division. Many of the senior managers even took early retirement. Thankfully I still have a job but 
+                            the two week furlough has cost me $3,400, of which only $1,100 was made up for from my stimulus check."
+                            
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br><br>
+
+              </div>
+              <div class="col-lg-4 mx-auto">
+
+                <div class="card text-center" style="width: 18rem;">
+                  <img src="images/valerie.jpg" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">Valerie<br>Museum Associate</h5>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter1">
+                      View her story
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog"
+                      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle"><img src="images/valerie.jpg" width=75px height=60px id="lindaIcon"> Valerie, Museum Associate</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            "My last day at McKenna Children's Museum was March 13th and I have not returned
+                            since. After being sent home early due to slow business, I recieved an email stating the Museum
+                            would be closed for a week due to COVID-19 precautions. The following week, the CEO sent out an 
+                            email to all employees stating we would be closed until further notice. Shortly after, I applied for 
+                            unemployment and have been relying on it as it is my only source of income. Although it is not as much as 
+                            regular earnings, I am thankful to be getting something to help with the bills. My brother also lost his 
+                            retail job, so my mother has been the only one still working, which has made our situation financially
+                            difficult."
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br><br>
+              </div>
+              <div class="col-lg-4 mx-auto">
+                
+                <div class="card text-center" style="width: 18rem;" id="card">
+                  <img src="images/linda.jpg" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">Linda<br>Houston Business Owner</h5>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                      View her story
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle"><img src="images/linda.jpg" width=75px height=60px id="lindaIcon"> Linda, Houston Buisness Owner</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            "When the 'Stay-at-Home' order was issued for Texas on April 3rd my Video Production business 
+                            came to a screeching halt. I am a sole proprietor and primarily produce content for corporate 
+                            meetings and events. As a result of all meetings and events being cancelled I had three large 
+                            contracts cancel which resulted in a revenue loss of $223,715.00.  Four pending proposals also
+                             went away resulting in an additional $80,978.00 loss.  I have applied for the EIDL (Economic 
+                             Injury Disaster Loan) but have not received a dime of stimulus assistance yet and have no way 
+                             of knowing if I will. I am currently living off savings in my Operating Account and contemplating
+                              my next move, as that business will not return in 2020."
+                          </div>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              <br><br>
+          </section>
+        </div>
+
+      </div>
+  </section>
+
+
+
+
+  </section>
+
+  <section id="sources">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 mx-auto">
+          <p class="sources">[data sources]</p>
+          <ul class="sources">
+            <li><a href="https://www.worldometers.info/coronavirus/country/us/">Worldometers.info</a></li>
+            <li><a href="https://fred.stlouisfed.org/graph/?id=ICNSA,">U.S. Employment and Training Administration
+                (retrieved from FRED)</a></li>
+            <li><a href="https://www.dol.gov/sites/dolgov/files/OPA/newsreleases/ui-claims/20200774.pdf">U.S. Department
+                of Labor</a></li>
+            <li><a href="https://www.bls.gov/news.release/pdf/empsit.pdf">Bureau of Labor Statistics</a></li>
+            <li class="note">note: the data used in this project was last updated as of May 5th, 2020</li>
+          </ul>
+        </div>
+        <div class="col-lg-6 mx-auto" align="right">
+          <p class="sources"><span class="wave" style='font-size:30px;'>&#128075;</span> Thanks for stopping by!</p><br>
+          <p class="sources">View more of my projects at:</p>
+          <a class="sources hvr-grow" align="right" href="http://www.jakeruff.com/">jakeruff.com</a><br><br>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 mx-auto" id="animlibs" align="left">
+          <p class="sources">[animation libraries used]</p>
+
+          <ul class="sources">
+            <li><a href="https://animate.style">animate.css</a></li>
+            <li><a href="https://michalsnik.github.io/aos/">AOS.css</a></li>
+            <li><a href="https://ianlunn.github.io/Hover/">hover.css</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-6 mx-auto" align="right">
+          <p class="sources">Questions or comments?</p>
+          <a class="sources hvr-grow" align="right" href="mailto:jake@jakeruff.com">Shoot me an email!</a><br><br>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="js/bubblechart.js"></script>
+
+
+  <!-- Custom JavaScript for this theme -->
+  <script src="js/scrolling-nav.js"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+
+
+</body>
+
+</html>
